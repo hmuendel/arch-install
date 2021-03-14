@@ -13,6 +13,7 @@ sudo virsh net-autostart default
 git clone https://aur.archlinux.org/pikaur.git
 cd pikaur/
 makepkg -si --noconfirm
+
 #pikaur -S --noconfirm system76-power
 #sudo systemctl enable --now system76-power
 #sudo system76-power graphics integrated
