@@ -28,7 +28,7 @@ systemctl enable bluetooth
 systemctl enable cups
 systemctl enable sshd
 systemctl enable avahi-daemon
-systemctl enable tlp
+systemctl enable tlp # You can comment this command out if you didn't install tlp, see above
 systemctl enable reflector.timer
 systemctl enable fstrim.timer
 systemctl enable libvirtd
