@@ -42,7 +42,7 @@ usermod -aG libvirt ermanno
 echo "ermanno ALL=(ALL) ALL" >> /etc/sudoers.d/ermanno
 
 
-/bin/echo -e "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
+printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 
 
 
