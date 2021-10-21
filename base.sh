@@ -11,25 +11,22 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 chmanie.local chmanie" >> /etc/hosts
 passwd
 
-# Pretty much default
+# pretty much default
 pacman -S grub grub-btrfs efibootmgr iwd base-devel linux-headers
 
-# Drivers
+# drivers
 pacman -S bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver
 
-# Tools
-pacman -S dosfstools xdg-utils \
+# tools
+pacman -S \
+    dosfstools xdg-utils \
     openssh openbsd-netcat nss-mdns inetutils dnsutils \
-    kitty ripgrep zsh fzy sd starship exa \
+    ripgrep zsh fzy sd starship exa \
     python python-pip \
     man-db zip unzip \
     borg python-llfuse \
     brightnessctl playerctl pamixer neofetch tlp \
-    gnupg pass pass-otp zbar \
-    noto-fonts-emoji \
-    ncmpcpp mpc \
-    neomutt signal-desktop \
-    qutebrowser libpipewire02 python-adblock pdfjs qt5-wayland python-tldextract
+    gnupg pass pass-otp zbar
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
