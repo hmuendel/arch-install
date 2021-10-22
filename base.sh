@@ -22,10 +22,11 @@ pacman -S \
     dosfstools xdg-utils \
     openssh openbsd-netcat nss-mdns inetutils dnsutils \
     ripgrep zsh fzy sd starship exa \
+    cronie tlp \
     python python-pip \
     man-db zip unzip \
     borg python-llfuse \
-    brightnessctl playerctl pamixer neofetch tlp \
+    brightnessctl playerctl pamixer neofetch \
     gnupg pass pass-otp zbar
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
@@ -37,7 +38,9 @@ systemctl enable iwd
 systemctl enable bluetooth
 systemctl enable cups.service
 systemctl enable tlp
-systemctl enable fstrim.timer
+systemctl enable cronie
+# Enable if you want to use weekly trims
+# systemctl enable fstrim.timer
 systemctl enable acpid
 
 useradd -m chris
