@@ -22,7 +22,7 @@ pacman -S \
     dosfstools xdg-utils \
     openssh openbsd-netcat nss-mdns inetutils dnsutils \
     ripgrep zsh fzy sd starship exa \
-    cronie tlp \
+    cronie power-profiles-daemon \
     python python-pip \
     man-db zip unzip \
     borg python-llfuse \
@@ -37,7 +37,7 @@ systemctl enable systemd-resolved
 systemctl enable iwd
 systemctl enable bluetooth
 systemctl enable cups.service
-systemctl enable tlp
+systemctl enable power-profiles-daemon
 systemctl enable cronie
 # Enable if you want to use weekly trims
 # systemctl enable fstrim.timer
