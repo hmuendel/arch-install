@@ -15,7 +15,7 @@ passwd
 pacman -S grub grub-btrfs efibootmgr iwd base-devel linux-headers
 
 # drivers
-pacman -S bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver
+pacman -S bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver vulkan-intel
 
 # tools
 pacman -S \
@@ -24,7 +24,7 @@ pacman -S \
     ripgrep zsh fzy sd starship exa \
     cronie power-profiles-daemon \
     python python-pip \
-    man-db zip unzip \
+    man-db zip unzip moreutils \
     borg python-llfuse \
     brightnessctl playerctl pamixer neofetch \
     gnupg pass pass-otp zbar
