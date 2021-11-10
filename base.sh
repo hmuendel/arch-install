@@ -24,6 +24,7 @@ pacman -S \
     ripgrep zsh fzy sd starship exa \
     cronie power-profiles-daemon \
     python python-pip \
+    meson cmake \
     man-db zip unzip moreutils \
     borg python-llfuse \
     brightnessctl playerctl pamixer neofetch \
@@ -47,6 +48,9 @@ useradd -m chris
 passwd chris
 usermod -aG storage chris
 usermod -aG audio chris
+usermod -aG wheel chris
+usermod -aG tty chris
+usermod -aG uucp chris
 
 echo "chris ALL=(ALL) ALL" >> /etc/sudoers.d/chris
 
