@@ -28,7 +28,8 @@ pacman -S \
     man-db zip unzip moreutils \
     borg python-llfuse \
     brightnessctl playerctl pamixer neofetch \
-    gnupg pass pass-otp zbar
+    gnupg pass pass-otp zbar \
+    pandoc texlive-core
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -46,11 +47,7 @@ systemctl enable acpid
 
 useradd -m chris
 passwd chris
-usermod -aG storage chris
-usermod -aG audio chris
-usermod -aG wheel chris
-usermod -aG tty chris
-usermod -aG uucp chris
+usermod -aG audio,storage,tty,uucp,wheel chris
 
 echo "chris ALL=(ALL) ALL" >> /etc/sudoers.d/chris
 

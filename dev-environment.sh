@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## configure git
+git config --global user.email "code@chmanie.com"
+git config --global user.name "chmanie"
+
 ## tools
 sudo pacman -S timew
 
