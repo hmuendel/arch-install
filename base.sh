@@ -11,14 +11,15 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 chmanie.local chmanie" >> /etc/hosts
 passwd
 
-# pretty much default
-pacman -S grub grub-btrfs efibootmgr iwd base-devel linux-headers
+# boot manager
+pacman -S grub grub-btrfs efibootmgr
 
 # drivers
-pacman -S bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver vulkan-intel
+pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver vulkan-intel
 
 # tools
 pacman -S \
+    base-devel linux-headers \
     dosfstools xdg-utils \
     openssh openbsd-netcat nss-mdns inetutils dnsutils \
     ripgrep zsh fzy sd starship exa \

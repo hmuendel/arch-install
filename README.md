@@ -12,7 +12,7 @@ A small summary:
 3. Partition the disk (btrfs)
 4. Format the partitions (btrfs)
 5. Mount the partitions
-6. Install the base packages into /mnt (`pacstrap /mnt linux base linux-firmware neovim intel-ucode btrfs-progs git`)
+6. Install the base packages into /mnt (`pacstrap /mnt linux base neovim intel-ucode btrfs-progs git openssh`)
 7. Generate the FSTAB file with genfstab -U /mnt >> /mnt/etc/FSTAB
 8. Chroot in with arch-chroot /mnt
 9. Download the git repository with git clone https://git.sr.ht/~chmanie/arch-install
