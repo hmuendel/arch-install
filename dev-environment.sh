@@ -26,7 +26,6 @@ sudo pacman -S arduino-cli arm-none-eabi-gdb openocd arm-none-eabi-binutils
 yay -S tio
 # for openocd
 sudo cp /usr/share/openocd/contrib/60-openocd.rules /etc/udev/rules.d/
-sudo udevadm control --reload
 
 ## rust
 sudo pacman -S rustup rust-analyzer
@@ -38,6 +37,18 @@ cargo install cargo-binutils
 rustup component add llvm-tools-preview
 # to run `cargo flash`
 cargo install cargo-flash
-echo 'done. to make cargo-flash work properly, install the udev rules: https://probe.rs/docs/getting-started/probe-setup/#udev-rules'
-echo '---'
-echo 'to compile for your target install the compile toolchain: https://docs.rust-embedded.org/book/intro/install.html'
+
+# install udev rules for probe-rs
+sudo curl -o /etc/udev/rules.d/99-probe-rs.rules https://probe.rs/files/99-probe-rs.rules
+
+# reload installed udev rules
+sudo udevadm control --reload
+
+# link config
+for config in chromium-flags.conf
+do
+    rm -rf ~/.config/$config
+    ln -s ~/dotfiles/.config/$config ~/.config/$config
+done
+
+printf "\e[1;32mDone. To compile for your target install the compile toolchain: https://docs.rust-embedded.org/book/intro/install.html\e[0m"

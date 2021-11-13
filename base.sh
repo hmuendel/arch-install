@@ -1,18 +1,15 @@
 #!/bin/bash
 
+echo "chmanie" >> /etc/hostname
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
-locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo "chmanie" >> /etc/hostname
+locale-gen
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 chmanie.local chmanie" >> /etc/hosts
 passwd
-
-# boot manager
-pacman -S grub grub-btrfs efibootmgr
 
 # drivers
 pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver vulkan-intel
@@ -20,20 +17,12 @@ pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pi
 # tools
 pacman -S \
     base-devel linux-headers \
-    dosfstools xdg-utils \
+    efibootmgr dosfstools xdg-utils \
     openssh openbsd-netcat nss-mdns inetutils dnsutils \
-    ripgrep zsh fzy sd starship exa \
-    cronie power-profiles-daemon \
-    python python-pip \
-    meson cmake \
+    meson cmake clang \
     man-db zip unzip moreutils \
-    borg python-llfuse \
-    brightnessctl playerctl pamixer neofetch \
-    gnupg pass pass-otp zbar \
-    pandoc texlive-core
-
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
+    cronie power-profiles-daemon |
+    sddm
 
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
@@ -51,6 +40,25 @@ passwd chris
 usermod -aG audio,storage,tty,uucp,wheel chris
 
 echo "chris ALL=(ALL) ALL" >> /etc/sudoers.d/chris
+
+cat << EOF > /etc/systemd/network/20-ethernet.network
+[Match]
+Name=enp*
+
+[Network]
+DHCP=true
+EOF
+
+cat << EOF >> /etc/systemd/network/25-wireless.network
+[Match]
+Name=wlan0
+
+[Network]
+DHCP=true
+EOF
+
+mv /root/arch-install /home/chris/ && chown -R chris:chris /home/chris/arch-install
+rm -rf /home/chris/.ssh && mv /root/.ssh /home/chris/ && chown -R chris:chris /home/chris/.ssh
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 
