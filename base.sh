@@ -37,7 +37,8 @@ systemctl enable acpid
 
 useradd -m chris
 passwd chris
-usermod -aG audio,storage,tty,uucp,wheel chris
+groupadd plugdev
+usermod -aG audio,plugdev,storage,tty,uucp,wheel chris
 
 echo "chris ALL=(ALL) ALL" >> /etc/sudoers.d/chris
 

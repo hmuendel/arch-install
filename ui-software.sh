@@ -21,3 +21,10 @@ do
     rm -rf ~/.config/$config
     ln -s ~/dotfiles/.config/$config ~/.config/$config
 done
+
+# create cache directory
+mkdir -p ~/.cache/mutt
+
+# set qutebrowser to be our default browser
+xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+xdg-mime default org.qutebrowser.qutebrowser.desktop x-scheme-handler/https x-scheme-handler/http

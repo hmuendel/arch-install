@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ## install sway and wayland tools
-sudo pacman -S sddm sway swayidle waybar wofi wl-clipboard grim swappy slurp qt5ct xdg-desktop-portal xdg-desktop-portal-wlr wayland wayland-protocols xorg-xwayland swaylock mako
+sudo pacman -S sddm sway swayidle waybar wl-clipboard grim swappy slurp qt5ct xdg-desktop-portal xdg-desktop-portal-wlr wayland wayland-protocols xorg-xwayland swaylock libnotify mako gammastep
 
-yay -S wob wlsunset
+yay -S wob fuzzel
 
 # link config
-for config in mako swappy sway waybar wofi
+for config in mako swappy sway waybar
 do
     rm -rf ~/.config/$config
     ln -s ~/dotfiles/.config/$config ~/.config/$config
@@ -18,3 +18,6 @@ sudo systemctl enable sddm
 # enable wayland/sway environment variables
 sudo cp ~/dotfiles/.local/bin/sway /usr/share/bin/
 sudo sed -i 's/^Exec=.*$/Exec=\/usr\/share\/bin\/sway/' /usr/share/wayland-sessions/sway.desktop
+
+printf "\e[1;32mDone! If you're looking for a nice sddm theme, look here:\e[0m"
+echo "https://framagit.org/MarianArlt/sddm-sugar-candy and https://wiki.archlinux.org/title/SDDM#Customizing_a_theme"
