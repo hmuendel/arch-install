@@ -17,8 +17,8 @@ pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pi
 # tools
 pacman -S \
     base-devel linux-headers \
-    efibootmgr dosfstools xdg-utils \
-    openssh openbsd-netcat nss-mdns inetutils dnsutils \
+    efibootmgr dosfstools udisks2 \
+    openssh openbsd-netcat nss-mdns inetutils dnsutils wget \
     meson cmake clang \
     man-db zip unzip moreutils \
     cronie power-profiles-daemon |

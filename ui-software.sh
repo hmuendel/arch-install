@@ -12,8 +12,8 @@ sudo pacman -S \
 
 yay -S gomuks libspotify syncplay
 
-# mopidy plugins
-sudo python3 -m pip install Mopidy-Spotify Mopidy-Subidy Mopidy-MPD
+# mopidy plugins and syncplay deps
+sudo python3 -m pip install Mopidy-Spotify Mopidy-Subidy Mopidy-MPD service_identity
 
 # link config
 for config in fontconfig kitty mopidy mpv mutt ncmpcpp qutebrowser zathura pavucontrol.ini syncplay.ini

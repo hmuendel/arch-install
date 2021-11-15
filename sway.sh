@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## install sway and wayland tools
-sudo pacman -S sddm sway swayidle waybar wl-clipboard grim swappy slurp qt5ct xdg-desktop-portal xdg-desktop-portal-wlr wayland wayland-protocols xorg-xwayland swaylock libnotify gammastep dunst
+sudo pacman -S sddm xdg-utils sway swayidle waybar wl-clipboard grim swappy slurp qt5ct xdg-desktop-portal xdg-desktop-portal-wlr wayland wayland-protocols xorg-xwayland swaylock libnotify gammastep dunst
 
 yay -S wob fuzzel
 

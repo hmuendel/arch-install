@@ -11,7 +11,7 @@ cd .. && rm -rf yay-bin
 
 # Install some basic tools
 sudo pacman -S \
-    ripgrep zsh fzy sd fd starship exa \
+    ripgrep zsh fzy sd fd starship exa z \
     python python-pip \
     borg python-llfuse nextcloud-client \
     brightnessctl playerctl pamixer neofetch \
