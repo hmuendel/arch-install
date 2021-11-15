@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ## install sway and wayland tools
-sudo pacman -S sddm sway swayidle waybar wl-clipboard grim swappy slurp qt5ct xdg-desktop-portal xdg-desktop-portal-wlr wayland wayland-protocols xorg-xwayland swaylock libnotify mako gammastep
+sudo pacman -S sddm sway swayidle waybar wl-clipboard grim swappy slurp qt5ct xdg-desktop-portal xdg-desktop-portal-wlr wayland wayland-protocols xorg-xwayland swaylock libnotify gammastep dunst
 
 yay -S wob fuzzel
 
 # link config
-for config in mako swappy sway waybar
+for config in swappy sway waybar dunst
 do
     rm -rf ~/.config/$config
     ln -s ~/dotfiles/.config/$config ~/.config/$config
