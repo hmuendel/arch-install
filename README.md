@@ -90,8 +90,8 @@ done
 do btrfs subvolume create @var/$i;
 done
 
-# mkdir @var/lib
-# btrfs sub create @var/lib/docker
+# mkdir -p @var/lib/docker
+# btrfs sub create @var/lib/docker/btrfs
 # umount /mnt
 
 ```
@@ -99,36 +99,22 @@ done
 Mount the subvolumes:
 
 ```
-
-
-cd ~
-umount /mnt
-# FIXME: REPLACE all of the mount options with this one
+# cd ~
+# umount /mnt
 # mount -o noatime,nodiratime,compress=zstd,space_cache=v2,discard=async,autodefrag,subvol=@/0/snapshot /dev/mapper/cryptoroot /mnt
 
-mkdir -p /mnt/{.snapshots,home,root,srv,tmp,usr/local,swap}
+# mkdir -p /mnt/{.snapshots,home,root,srv,tmp,usr/local,swap}
+# mkdir -p /mnt/var/{tmp,spool,log,lib/docker/btrfs}
 
-mkdir -p /mnt/var/{tmp,spool,log,lib/docker}
-mount /dev/mapper/cryptoroot /mnt/.snapshots/ -o subvol=@,compress-force=zstd,noatime,space_cache=v2
+# mount -o noatime,nodiratime,compress=zstd,space_cache=v2,discard=async,autodefrag,subvol=@ /dev/mapper/cryptoroot /mnt/.snapshots/ 
 
-# mount subvolumes
-# separate /{home,root,srv,swap,usr/local} from root filesystem
-for i in {home,root,srv,swap,usr/local};
-do mount /dev/mapper/cryptoroot /mnt/$i -o subvol=@$i,compress-force=zstd,noatime,space_cache=v2;
+# for i in {home,root,srv,swap,usr/local};
+do mount -o subvol=@$i,noatime,nodiratime,compress=zstd,space_cache=v2,discard=async,autodefrag /dev/mapper/cryptoroot /mnt/$i
 done
 
-# separate /var/{tmp,spool,log} from root filesystem
-for i in {tmp,spool,log};
-do mount /dev/mapper/cryptoroot /mnt/var/$i -o subvol=@var/$i,compress-force=zstd,noatime,space_cache=v2;
+# for i in {tmp,spool,log,lib/docker/btrfs};
+do mount -o subvol=@var/$i,noatime,nodiratime,compress=zstd,space_cache=v2,discard=async,autodefrag /dev/mapper/cryptoroot /mnt/var/$i 
 done
-
-# mount -o noatime,nodiratime,compress=zstd,space_cache,discard=async,autodefrag,subvol=@ /dev/mapper/cryptoroot /mnt
-# mkdir -p /mnt/{boot,home,var/cache/pacman/pkg,/var/lib/docker/btrfs,.snapshots,btrfs}
-# mount -o noatime,nodiratime,compress=zstd,space_cache,discard=async,autodefrag,subvol=@home /dev/mapper/cryptoroot /mnt/home
-# mount -o noatime,nodiratime,compress=zstd,space_cache,discard=async,autodefrag,subvol=@pkg /dev/mapper/cryptoroot /mnt/var/cache/pacman/pkg
-# mount -o noatime,nodiratime,compress=zstd,space_cache,discard=async,autodefrag,subvol=@snapshots /dev/mapper/cryptoroot /mnt/.snapshots
-# mount -o noatime,nodiratime,compress=zstd,space_cache,discard=async,autodefrag,subvol=@docker /dev/mapper/cryptoroot /mnt/var/lib/docker/btrfs
-# mount -o noatime,nodiratime,compress=zstd,space_cache,discard=async,autodefrag,subvolid=5 /dev/mapper/cryptoroot /mnt/btrfs
 ```
 
 Disable copy on write
@@ -245,47 +231,15 @@ Have fun with your system!
 
 ## Taking snapshots with snapper
 
-### Create root filesystem snapshot
-```
-snapper -c root create
-```
-Additional options for create, such as --description, see snapper help.
-
-### Rollback root filesystem
-If the system is broken, reboot, select a bootable entry in GRUB snapshot list. Your computer will then boot with a read-only root filesystem with a writable OverlayFS on it.
-
-Run `snapper -c root list` to find out which snapshot you want to rollback to.
+### Create manual root filesystem snapshot
 
 ```
- # | Type   | Pre # | Date                            | User | Cleanup | Description        | Userdata
----+--------+-------+---------------------------------+------+---------+--------------------+---------
-0- | single |       |                                 | root |         | current            |
-1  | single |       | Tue 09 Feb 2021 09:44:55 PM +08 | root | number  | boot               |
-2  | single |       | Tue 09 Feb 2021 09:49:30 PM +08 | root | number  | boot               |
-3  | pre    |       | Tue 09 Feb 2021 09:49:51 PM +08 | root | number  | pacman -S dropbear |
-4  | post   |     3 | Tue 09 Feb 2021 09:49:52 PM +08 | root | number  | dropbear           |
+snapper -c root create --description 'Foo'
 ```
 
-If we want to rollback to 3, run `snapper --ambit classic rollback 3` to rollback.
+### Restoring snapshots
 
-```
-Ambit is classic.
-Creating read-only snapshot of current system. (Snapshot 5.)
-Creating read-write snapshot of snapshot 3. (Snapshot 6.)
-Setting default subvolume to snapshot 6.
-```
-
-FIXME: This should be a manual for systemd-boot
-
-Remember the new default subvolume number 6. This will be the new / the computer will boot into. Now run grub-mkconfig -o /boot/grub/grub.cfg to let GRUB know about the new snapshots. Reboot, select snapshot 6 from GRUB menu.
-
-After reboot, run
-
-```
-grub-install
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-to make snapshot 6 the default boot volume. Then you won't need to manually select it again on next reboot.
+To restore a previous snapshot see https://wiki.archlinux.org/title/Snapper#Restoring_/_to_its_previous_snapshot.
 
 ## References
 
@@ -294,3 +248,5 @@ to make snapshot 6 the default boot volume. Then you won't need to manually sele
 [2] [Arch Linux - UEFI, systemd-boot, LUKS, and btrfs](https://austinmorlan.com/posts/arch_linux_install/)
 
 [3] [Arch Linux Wiki: systemd-boot](https://wiki.archlinux.org/index.php/systemd-boot)
+
+[4] [Arch Linux Wiki: Snapper](https://wiki.archlinux.org/title/Snapper#Restoring_/_to_its_previous_snapshot)

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install xorg and i3 + tools
-sudo pacman -S sddm xdg-utils i3-gaps rofi i3lock xss-lock xclip flameshot nitrogen dunst libnotify
+sudo pacman -S xdg-utils i3-gaps rofi i3lock xss-lock xclip flameshot nitrogen dunst libnotify
 
 yay -S polybar picom-jonaburg-git
 
@@ -11,8 +11,4 @@ do
     ln -s ~/dotfiles/.config/$config ~/.config/$config
 done
 
-# enable ssdm display manager
-sudo systemctl enable sddm
-
-printf "\e[1;32mDone! If you're looking for a nice sddm theme, look here:\e[0m"
-echo "https://framagit.org/MarianArlt/sddm-sugar-candy and https://wiki.archlinux.org/title/SDDM#Customizing_a_theme"
+printf "\e[1;32mDone!\e[0m"
