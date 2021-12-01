@@ -16,6 +16,7 @@ done
 sudo systemctl enable sddm
 
 # enable wayland/sway environment variables
+sudo mkdir /usr/share/bin
 sudo cp ~/dotfiles/.local/bin/sway /usr/share/bin/
 sudo sed -i 's/^Exec=.*$/Exec=\/usr\/share\/bin\/sway/' /usr/share/wayland-sessions/sway.desktop
 

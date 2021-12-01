@@ -22,8 +22,9 @@ do
     ln -s ~/dotfiles/.config/$config ~/.config/$config
 done
 
-# create cache directory
+# create mutt directories
 mkdir -p ~/.cache/mutt
+mkdir -p ~/attachments
 
 # set qutebrowser to be our default browser
 xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop

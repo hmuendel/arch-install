@@ -17,12 +17,11 @@ pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pi
 # tools
 pacman -S \
     base-devel linux-headers \
-    efibootmgr dosfstools udisks2 \
-    openssh openbsd-netcat nss-mdns inetutils dnsutils wget \
+    dosfstools udisks2 \
+    openbsd-netcat nss-mdns inetutils dnsutils wget \
     meson cmake clang \
     man-db zip unzip moreutils \
-    cronie power-profiles-daemon |
-    sddm
+    cronie power-profiles-daemon
 
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved

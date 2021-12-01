@@ -38,6 +38,8 @@ git clone git@git.sr.ht:~chmanie/fonts ~/.fonts
 git clone git@git.sr.ht:~chmanie/pass ~/.password-store
 git clone git@git.sr.ht:~chmanie/org ~/org
 
+mkdir -p ~/.config
+
 # link config
 for config in nvim pipewire zsh starship.toml
 do
