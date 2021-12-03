@@ -5,7 +5,7 @@ git config --global user.email "code@chmanie.com"
 git config --global user.name "chmanie"
 
 ## tools
-sudo pacman -S timew
+sudo pacman -S timew jq
 
 ## web-dev
 sudo pacman -S nodejs npm chromium
@@ -24,7 +24,8 @@ sudo usermod -aG docker chris
 ## arduino/embedded
 sudo pacman -S arduino-cli arm-none-eabi-gdb openocd arm-none-eabi-binutils
 yay -S tio
-# for openocd
+
+# install udev rules for openocd
 sudo cp /usr/share/openocd/contrib/60-openocd.rules /etc/udev/rules.d/
 
 ## rust

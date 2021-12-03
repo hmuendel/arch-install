@@ -1,10 +1,9 @@
 # Arch Install LUKS, BTRFS, systemd-boot
 
-(loosely based on https://www.nerdstuff.org/posts/2020/2020-004_arch_linux_luks_btrfs_systemd-boot/)
+(loosely based on https://www.nerdstuff.org/posts/2020/2020-004_arch_linux_luks_btrfs_systemd-boot/ and https://wiki.archlinux.org/title/User:M0p/LUKS_Root_on_Btrfs)
 
 In this repository you will find packages-scripts for the base install of Arch Linux and the Gnome, i3 and sway environments.
 Modify the packages to your liking and then run with ./scriptname.
-
 
 ## Start
 

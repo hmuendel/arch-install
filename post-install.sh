@@ -11,12 +11,12 @@ cd .. && rm -rf yay-bin
 
 # Install some basic tools
 sudo pacman -S \
-    ripgrep zsh fzy sd fd starship exa z \
+    ripgrep zsh fzy sd fd starship exa z bat \
     python python-pip \
-    borg python-llfuse nextcloud-client \
+    borg python-llfuse \
     brightnessctl playerctl pamixer neofetch \
     gnupg pass pass-otp zbar \
-    pandoc texlive-core
+    pandoc texlive-core glow
 
 # Install AUR packages
 yay -S nvim-packer-git btop

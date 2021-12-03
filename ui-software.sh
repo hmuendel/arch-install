@@ -10,7 +10,7 @@ sudo pacman -S \
     neomutt urlscan elinks signal-desktop \
     qutebrowser libpipewire02 python-adblock pdfjs qt5-wayland python-tldextract
 
-yay -S gomuks libspotify syncplay
+yay -S gomuks libspotify syncplay discord_arch_electron
 
 # mopidy plugins and syncplay deps
 sudo python3 -m pip install Mopidy-Spotify Mopidy-Subidy Mopidy-MPD service_identity
