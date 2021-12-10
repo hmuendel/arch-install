@@ -12,7 +12,7 @@ echo "127.0.1.1 chmanie.local chmanie" >> /etc/hosts
 passwd
 
 # drivers
-pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver vulkan-intel
+pacman -S iwd linux-firmware bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack acpi acpi_call sof-firmware acpid mesa intel-media-driver vulkan-intel intel-gpu-tools
 
 # tools
 pacman -S \
