@@ -43,6 +43,9 @@ usermod -aG audio,plugdev,realtime,storage,tty,uucp,wheel chris
 
 echo "chris ALL=(ALL) ALL" >> /etc/sudoers.d/chris
 
+# pacman configuration
+sudo sed -i 's/\[options\]/[options]\nColor\nILoveCandy\nVerbosePkgLists/' /etc/pacman.conf
+
 # network configuration
 cat << EOF > /etc/systemd/network/20-ethernet.network
 [Match]
@@ -52,7 +55,7 @@ Name=enp*
 DHCP=true
 EOF
 
-cat << EOF >> /etc/systemd/network/25-wireless.network
+cat << EOF > /etc/systemd/network/25-wireless.network
 [Match]
 Name=wlan0
 
