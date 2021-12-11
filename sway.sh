@@ -6,7 +6,7 @@ sudo pacman -S xdg-utils sway swayidle waybar wl-clipboard grim swappy slurp qt5
 yay -S wob fuzzel
 
 # link config
-for config in swappy sway waybar dunst
+for config in swappy sway waybar dunst swaylock
 do
     rm -rf ~/.config/$config
     ln -s ~/dotfiles/.config/$config ~/.config/$config
