@@ -14,5 +14,6 @@ sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf
 sudo sed -i 's/Current=/Current=sugar-candy/' /etc/sddm.conf
 sudo cp /home/chris/pictures/168875-japan-tokyo-at-night-wallpaper-top-free-japan-tokyo-at-night.jpg /usr/share/sddm/themes/sugar-candy/Backgrounds/
 sudo sed -i 's/Background=.*/Background="Backgrounds\/168875-japan-tokyo-at-night-wallpaper-top-free-japan-tokyo-at-night.jpg"/' /usr/share/sddm/themes/sugar-candy/theme.conf
+sudo sed -i 's/ForceHideCompletePassword=.*/ForceHideCompletePassword="true"/' /usr/share/sddm/themes/sugar-candy/theme.conf
 
 printf "\e[1;32mDone!\e[0m"

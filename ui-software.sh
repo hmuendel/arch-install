@@ -4,7 +4,7 @@
 sudo pacman -S \
     kitty \
     arc-gtk-theme noto-fonts-emoji \
-    zathura zathura-pdf-mupdf \
+    imv zathura zathura-pdf-mupdf \
     mpv yt-dlp \
     ncmpcpp mpc mopidy pavucontrol \
     neomutt urlscan elinks signal-desktop \
