@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## configure git
-git config --global user.email "code@chmanie.com"
-git config --global user.name "chmanie"
+git config --global user.email "hans@muendelein.me"
+git config --global user.name "hmuendel"
 
 ## tools
 sudo pacman -S timew jq
@@ -19,7 +19,7 @@ npm i -g typescript-language-server vscode-langservers-extracted
 
 ## docker
 sudo pacman -S docker docker-compose
-sudo usermod -aG docker chris
+sudo usermod -aG docker hans
 
 ## arduino/embedded
 sudo pacman -S arduino-cli arm-none-eabi-gdb openocd arm-none-eabi-binutils

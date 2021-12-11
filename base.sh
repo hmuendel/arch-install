@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "chmanie" >> /etc/hostname
+echo "halem" >> /etc/hostname
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
@@ -8,7 +8,7 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 locale-gen
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 chmanie.local chmanie" >> /etc/hosts
+echo "127.0.1.1 halem.local halem" >> /etc/hosts
 passwd
 
 # drivers
@@ -36,12 +36,12 @@ systemctl enable cronie
 systemctl enable acpid
 
 # create user
-useradd -m chris
-passwd chris
+useradd -m hans
+passwd hans
 groupadd plugdev
-usermod -aG audio,plugdev,realtime,storage,tty,uucp,wheel chris
+usermod -aG audio,plugdev,realtime,storage,tty,uucp,wheel hans
 
-echo "chris ALL=(ALL) ALL" >> /etc/sudoers.d/chris
+echo "hans ALL=(ALL) ALL" >> /etc/sudoers.d/hans
 
 # pacman configuration
 sudo sed -i 's/\[options\]/[options]\nColor\nILoveCandy\nVerbosePkgLists/' /etc/pacman.conf
@@ -73,8 +73,8 @@ mount -a
 chmod 750 /.snapshots
 
 # move things to main user
-mv /root/arch-install /home/chris/ && chown -R chris:chris /home/chris/arch-install
-rm -rf /home/chris/.ssh && mv /root/.ssh /home/chris/ && chown -R chris:chris /home/chris/.ssh
+mv /root/arch-install /home/hans/ && chown -R hans:hans /home/hans/arch-install
+rm -rf /home/hans/.ssh && mv /root/.ssh /home/hans/ && chown -R hans:hans /home/hans/.ssh
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 

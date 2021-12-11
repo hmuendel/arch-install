@@ -1,17 +1,23 @@
 # Arch Install LUKS, BTRFS, systemd-boot
 
-(loosely based on https://www.nerdstuff.org/posts/2020/2020-004_arch_linux_luks_btrfs_systemd-boot/ and https://wiki.archlinux.org/title/User:M0p/LUKS_Root_on_Btrfs)
+completely based on https://git.sr.ht/~chmanie/arch-install
 
-In this repository you will find packages-scripts for the base install of Arch Linux and the Gnome, i3 and sway environments.
+which is loosely based on 
+https://www.nerdstuff.org/posts/2020/2020-004_arch_linux_luks_btrfs_systemd-boot/ 
+and https://wiki.archlinux.org/title/User:M0p/LUKS_Root_on_Btrfs
+In this repository you will find packages-scripts for the base install of Arch 
+Linux and the Gnome, i3 and sway environments.
 Modify the packages to your liking and then run with ./scriptname.
 
 ## Start
 
-Boot into the arch install iso, connect to wifi/ethernet and refresh the servers with `pacman -Syy`
+Boot into the arch install iso, connect to wifi/ethernet and refresh the servers 
+with `pacman -Syy`
 
 ## Partitioning
 
-For the rest of this post, we assume that we install Arch Linux on `/dev/nvme0n1`. Adjust the steps for your setup if necessary.
+For the rest of this post, we assume that we install Arch Linux on 
+`/dev/nvme0n1`. Adjust the steps for your setup if necessary.
 
 ```
 # gdisk /dev/nvme0n1
@@ -43,13 +49,15 @@ Command (? for help): w
 
 ## Encryption
 
-Create an encrypted container for the root file system (you need to define a passphrase):
+Create an encrypted container for the root file system (you need to define a
+passphrase):
 
 ```
 # cryptsetup luksFormat /dev/nvme0n1p2
 ```
 
-Open the container ("`cryptoroot`" is just a placeholder, you can use a name of your choice, but remember to adopt the subsequent steps of the guide accordingly):
+Open the container ("`cryptoroot`" is just a placeholder, you can use a name of 
+your choice, but remember to adopt the subsequent steps of the guide accordingly):
 
 ```
 # cryptsetup open /dev/nvme0n1p2 cryptoroot
@@ -57,13 +65,16 @@ Open the container ("`cryptoroot`" is just a placeholder, you can use a name of 
 
 ## File System Creation
 
-Format the EFI partition with FAT32 and give it the label `EFI` - you can choose any other label name:
+Format the EFI partition with FAT32 and give it the label `EFI` - you can 
+choose any other label name:
 
 ```
 # mkfs.vfat -F32 -n EFI /dev/nvme0n1p1
 ```
 
-Format the root partition with Btrfs and give it the label `ROOT` - you can choose any other label name. If you didn't open the LUKS container under the name "`cryptoroot`" you must adjust the command accordingly:
+Format the root partition with Btrfs and give it the label `ROOT` - you can 
+choose any other label name. If you didn't open the LUKS container under the 
+name "`cryptoroot`" you must adjust the command accordingly:
 
 ```
 # mkfs.btrfs -L ROOT /dev/mapper/cryptoroot
@@ -72,7 +83,10 @@ Format the root partition with Btrfs and give it the label `ROOT` - you can ch
 
 ## Create and Mount Subvolumes
 
-Create [subvolumes](https://wiki.archlinux.org/index.php/Btrfs#Subvolumes) for root, home, the package cache, [snapshots](https://wiki.archlinux.org/index.php/Btrfs#Snapshots) and the entire Btrfs file system:
+Create [subvolumes](https://wiki.archlinux.org/index.php/Btrfs#Subvolumes) for 
+root, home, the package cache, 
+[snapshots](https://wiki.archlinux.org/index.php/Btrfs#Snapshots) and the entire 
+Btrfs file system:
 
 ```
 # cd /mnt
@@ -145,7 +159,8 @@ Generate `/etc/fstab`:
 # genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
-Remove hard-coded system subvolume. If not removed, system will ignore btrfs default-id setting, which is used by snapper when rolling back:
+Remove hard-coded system subvolume. If not removed, system will ignore btrfs 
+default-id setting, which is used by snapper when rolling back:
 
 ```
 sed -i 's|,subvolid=258,subvol=/@/0/snapshot,subvol=@/0/snapshot||g' $INST_MNT/etc/fstab
@@ -159,7 +174,9 @@ sed -i 's|,subvolid=258,subvol=/@/0/snapshot,subvol=@/0/snapshot||g' $INST_MNT/e
 
 ### Initramfs
 
-Configure the creation of [initramfs](https://wiki.archlinux.org/index.php/Arch_boot_process#initramfs) by editing `/etc/mkinitcpio.conf`. Change the line `HOOKS=...` to:
+Configure the creation of 
+[initramfs](https://wiki.archlinux.org/index.php/Arch_boot_process#initramfs) 
+by editing `/etc/mkinitcpio.conf`. Change the line `HOOKS=...` to:
 
 ```
 HOOKS="base keyboard udev autodetect modconf block encrypt btrfs filesystems fsck"
@@ -179,7 +196,8 @@ Install [systemd-boot](https://wiki.archlinux.org/index.php/Systemd-boot):
 # bootctl --path=/boot install
 ```
 
-The UUID of the root partition can be determined via `blkid`. Create file `/boot/loader/entries/arch.conf` containing the uuid like so: 
+The UUID of the root partition can be determined via `blkid`. Create file 
+`/boot/loader/entries/arch.conf` containing the uuid like so: 
 
 ```
 # blkid -s UUID -o value /dev/nvme0n1p2 > /boot/loader/entries/arch.conf
@@ -206,11 +224,10 @@ editor   no
 
 ## System Configuration
 
-Copy your `.ssh` folder from a backup into `/root`. Then clone the install repository:
-
+Get the scripts fomr github
 ```
-# cd ~ && git clone https://git.sr.ht/~chmanie/arch-install
-# cd arch-install
+# cd ~
+# curl https://raw.githubusercontent.com/hmuendel/arch-install/master/base.sh -O
 # ./base.sh
 ```
 
@@ -224,7 +241,8 @@ Exit `chroot`, unmount partitions and reboot:
 # reboot
 ```
 
-After the reboot, the `arch-install` files will be in your home directory. Continue with `post-install.sh` (important!), the rest can be run in any order.
+After the reboot, the `arch-install` files will be in your home directory. 
+Continue with `post-install.sh` (important!), the rest can be run in any order.
 
 Have fun with your system!
 
@@ -238,7 +256,8 @@ snapper -c root create --description 'Foo'
 
 ### Restoring snapshots
 
-To restore a previous snapshot see https://wiki.archlinux.org/title/Snapper#Restoring_/_to_its_previous_snapshot.
+To restore a previous snapshot see 
+https://wiki.archlinux.org/title/Snapper#Restoring_/_to_its_previous_snapshot.
 
 ## References
 

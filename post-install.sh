@@ -30,7 +30,7 @@ chsh -s /bin/zsh
 echo 'ZDOTDIR=$HOME/.config/zsh' > ~/.zshenv
 
 # Create ~/volumes directories
-mkdir -p /home/chris/volumes/{usb1,usb2,backups}
+mkdir -p /home/hans/volumes/{usb1,usb2,backups}
 
 # Clone all config + data repos
 git clone --recursive git@git.sr.ht:~chmanie/dotfiles ~/dotfiles
