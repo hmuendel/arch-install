@@ -13,7 +13,7 @@ cd .. && rm -rf yay-bin
 sudo pacman -S \
     ripgrep zsh fzy sd fd starship exa z bat \
     python python-pip \
-    borg python-llfuse \
+    python-llfuse \
     brightnessctl playerctl pamixer neofetch \
     gnupg pass pass-otp zbar \
     pandoc texlive-core glow

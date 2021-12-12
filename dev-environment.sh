@@ -2,10 +2,10 @@
 
 ## configure git
 git config --global user.email "hans@muendelein.me"
-git config --global user.name "hmuendel"
+git config --global user.name "hans"
 
 ## tools
-sudo pacman -S timew jq
+sudo pacman -S timew jq yq
 
 ## web-dev
 sudo pacman -S nodejs npm chromium
