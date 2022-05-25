@@ -4,7 +4,6 @@ export HOSTNAME=halem
 export USER=hans
 
 # Run this as the main user of the system
-su "${USER}"
 
 # AUR Packages
 # Install yay

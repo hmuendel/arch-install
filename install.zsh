@@ -83,11 +83,11 @@ chmod +x /mnt/root/packages.zsh
 curl https://raw.githubusercontent.com/hmuendel/arch-install/master/config.zsh -o /mnt/root/config.zsh
 chmod +x /mnt/root/config.zsh
 
-curl https://raw.githubusercontent.com/hmuendel/arch-install/master/user-config.zsh -o /mnt/root/user-config.zsh
-chmod +x /mnt/root/user-config.zsh
-
 # `chroot` into the new system:
 arch-chroot /mnt/ /root/boot-config.zsh
 arch-chroot /mnt/ /root/packages.zsh
 arch-chroot /mnt/ /root/config.zsh
-arch-chroot /mnt/ /root/user-config.zsh
+
+curl https://raw.githubusercontent.com/hmuendel/arch-install/master/user-config.zsh -o "/mnt/home/${USER}user-config.zsh"
+chmod +x "/mnt/home/${USER}/user-config.zsh"
+chown "${USER}:${USER}" "/mnt/home/${USER}/user-config.zsh"

@@ -105,32 +105,11 @@ pacman -S --noconfirm \
     wl-clipboard \
     xdg-desktop-portal-wlr \
     xdg-utils \
+    xorg-xwayland \
     yq \
     yt-dlp \
     zathura \
     zathura-pdf-mupdf \
     zbar \
     zip 
-
-# AUR Packages
-# Install yay
-mkdir -p ~/downloads && cd ~/downloads
-# git clone https://aur.archlinux.org/yay-bin.git
-# cd yay-bin
-# makepkg -si
-# cd .. && rm -rf yay-bin
-git clone https://github.com/Morganamilo/paru.git
-cd paru
-makepkg -si
-cd .. && rm -rf paru
-# Install AUR packages
-paru -S --noconfirm
-  discord_arch_electron  \
-  fuzzel \
-  libspotify  \
-  nerd-fonts-noto \
-  nvim-packer-git  \
-  system76-firmware \
-  system76-firmware-daemon \
-  wob  
 

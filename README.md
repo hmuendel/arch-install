@@ -21,6 +21,12 @@ Execute the installer script
 export CRYPT_PW=<encryption password>
 curl https://raw.githubusercontent.com/hmuendel/arch-install/master/install.zsh | zsh | tee install.log
 ```
+After this is finished, reboot the machine and login as your main user. 
+Excute the script in your home directory to finish setup.
+
+```
+./user-config.zsh
+```
 
 ## Pacstrap Installed Packages:
 ### [linux](https://archlinux.org/packages/core/x86_64/linux/)
@@ -230,6 +236,8 @@ Command-line copy/paste utilities for Wayland
 xdg-desktop-portal backend for wlroots
 ### [xdg-utils](https://archlinux.org/packages/extra/any/xdg-utils/)
 Command line tools that assist applications with a variety of desktop integration tasks
+### [xorg-xwayland](https://archlinux.org/packages/extra/any/xorg-xwayland/)
+run X clients under wayland
 ### [yq](https://archlinux.org/packages/community/any/yq/)
 Command-line YAML, XML, TOML processor - jq wrapper for YAML/XML/TOML documents
 ### [yt-dlp](https://archlinux.org/packages/community/any/yt-dlp/)
@@ -276,12 +284,3 @@ snapper -c root create --description 'Foo'
 To restore a previous snapshot see 
 https://wiki.archlinux.org/title/Snapper#Restoring_/_to_its_previous_snapshot.
 
-## References
-
-[1] [Arch My Way 1 | Grundsystem installieren](https://www.youtube.com/watch?v=oT7gs2CmsnQ) (German)
-
-[2] [Arch Linux - UEFI, systemd-boot, LUKS, and btrfs](https://austinmorlan.com/posts/arch_linux_install/)
-
-[3] [Arch Linux Wiki: systemd-boot](https://wiki.archlinux.org/index.php/systemd-boot)
-
-[4] [Arch Linux Wiki: Snapper](https://wiki.archlinux.org/title/Snapper#Restoring_/_to_its_previous_snapshot)
